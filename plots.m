@@ -3,7 +3,7 @@
 % 
 %   Authors
 %
-%       Carmen Ortega Sabater - Predoctoral researcher
+%       Carmen Ortega Sabater - PhD Student
 %           carmen.ortegasabater@uclm.es
 %
 %       Víctor M. Pérez García  - PI   victor.perezgarcia@uclm.es             
@@ -33,42 +33,11 @@ for ii = 2:replicates %Skip first inf column
 end 
 plot( time, mean_rho_average, 'Color', [93 90 89]/255, 'LineWidth', 3.5 );  
 xlabel( '$t\;(days)$', 'FontSize', 18, 'Interpreter','latex' ); 
-ylabel('$\textrm{Average proliferation rate} \; (\bar{\rho})$','FontSize', 18, 'Interpreter','latex');
+ylabel('$\textrm{Average proliferation rate} \; (\mathrm{days}^{-1})$','FontSize', 18, 'Interpreter','latex');
 hold off
 
-% Figure 2. Evolution of the centroid of the distribution
-% We use the average of population and centroid evolution for all
-% simulations
 
-% Customize colormap - Fogata palette 
-mymap = [39 153 137
-    80 166 132
-    169 196 127 
-    251 221 122 
-    255 181 73
-    255 157 110
-    227 120 94 
-    194 110 96 
-    164 73 61 
-    130 59 52]/255;
-
-figure();
-hold on
-box on
-ax = gca;
-ax.FontSize = 18; 
-pcolor(log10(mean_population+1));
-shading interp;
-colormap(mymap);
-plot(mean_centroid,time,'w--','LineWidth',3); % We have to use the average for all simulations
-axis([1 Npheno 0 simSteps]);
-title('log N(Phenotype, time)', 'FontSize', 18);
-xlabel('$\textrm{Phenotype index}$', 'FontSize', 18, 'Interpreter','latex' );
-ylabel('$\textrm{Time (days)}$', 'FontSize', 18, 'Interpreter','latex')
-colorbar;
-hold off;
-
-% Figure 3. Evolution of total population with time.
+% Figure 2. Evolution of total population with time.
 
 figure();
 hold on
@@ -83,7 +52,7 @@ xlabel('$\textrm{Time (days)}$', 'FontSize', 18, 'Interpreter','latex');
 ylabel('$\textrm{log N (cells)}$', 'FontSize', 18, 'Interpreter','latex');
 hold off
 
-% Figure 4. Log N (total population) vs. log Activity (newborn cells)
+% Figure 3. Log N (total population) vs. log Activity (newborn cells)
 
 figure();
 hold on
@@ -98,7 +67,7 @@ xlabel('$\textrm{log N (cells)}$', 'FontSize', 18, 'Interpreter','latex');
 ylabel('$\textrm{log Activity (cells)}$', 'FontSize', 18, 'Interpreter','latex');
 hold off
 
-% Figure 5. Evolution of phenotypic distribution with time. 
+% Figure 4. Evolution of phenotypic distribution with time. 
 
 pF_1 = mean_phenoFreq( 1, : );  
 pF_midtime = mean_phenoFreq( size(Population,1)/2, :); 

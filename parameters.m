@@ -3,7 +3,7 @@
 % 
 %   Authors
 %
-%       Carmen Ortega Sabater - Predoctoral researcher
+%       Carmen Ortega Sabater - PhD Student
 %           carmen.ortegasabater@uclm.es
 %
 %       Víctor M. Pérez García  - PI   victor.perezgarcia@uclm.es             
@@ -18,7 +18,7 @@
 %       Parameters       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    simSteps = 30;             % Measured in days (total simulation time)
+    simSteps = 1;             % Measured in days (total simulation time)
     deltat = [1 2 4 8 16 32];   % 24h 12h 6h 3h 1.5h 0.75h respectively
     dt = 24;
     up_simSteps = dt*simSteps;  % Adjust number of outputs to have the same 
@@ -28,7 +28,7 @@
 
     HalfLatt = 21;              % Starting phenotype [rho_* = 0.2]
     
-    K = 5*10^9                  % Carrying capacity (K) 
+    K = 5*10^9;                  % Carrying capacity (K) 
     
 %%%%%%%%%%%%%%%
 %    RATES    %
@@ -45,13 +45,14 @@
     ProbChange  = 6;   % Gamma [days^-1]. 1 phenotypic change every 4 hours                   
     PhenoSwitch = ProbChange*(1/dt)*ones(size(rho)); 
     
-    D = ProbChange*(((rhomax-rhomin)/(Npheno-1))^2)/2 % Difussion coefficient (D) [days^-2] 
+    D = ProbChange*(((rhomax-rhomin)/(Npheno-1))^2)/2; % Difussion coefficient (D) [days^-2] 
     
 % Probability of losing these epigenetic modifications
 % (reversible changes scenario)
 % In our case we are considering this lost after around 6 cell divisions
     %ProbBack = rho;
-    ProbBack    = 1*ones(size(rho)) %[days^-1]; 
+    % We tried the following ProbBack values: 0, 0.024, 0.06, 0.1 [days^-1]
+    ProbBack    = 0.024*ones(size(rho)); %[days^-1]
     
 % Death probability. All cells die with the same death rate
 % 1/4*rho from initiating phenotype (HalfLatt)

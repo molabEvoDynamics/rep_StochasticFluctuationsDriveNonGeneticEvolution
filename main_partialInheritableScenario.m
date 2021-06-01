@@ -3,7 +3,7 @@
 % 
 %   Authors
 %
-%       Carmen Ortega Sabater - Predoctoral researcher
+%       Carmen Ortega Sabater - PhD Student
 %           carmen.ortegasabater@uclm.es
 %
 %       Víctor M. Pérez García  - PI   victor.perezgarcia@uclm.es             
@@ -76,8 +76,6 @@ for m = 1:replicates
             
             % REVERSIBLE changes
             nb = newborn - ChangePhenoUp - ChangePhenoDown - PhenoBack;
-            % IRREVERSIBLE changes
-            %nb = newborn - ChangePhenoUp - ChangePhenoDown;
             
             % Computation of those changing phenotypes
             CPUp   = [0 ChangePhenoUp(1:Npheno-1)];
@@ -95,15 +93,8 @@ for m = 1:replicates
                 PhBack(Phj) = sum(PhenoBackX==Phj);
             end;
             
-            % REVERSIBLE changes 
-            % n = n + CPUp + CPDown + nb + PhBack;
             % REVERSIBLE changes + DEATH
             n = n + CPUp + CPDown + nb + PhBack - dead;
-            
-            % IRREVERSIBLE changes 
-            % n = n + CPUp + CPDown + nb;
-            % IRREVERSIBLE changes + DEATH
-            %n = n + CPUp + CPDown + nb - dead ;
             
             % Save results
             rho_average(s,m) = sum(rho.*n)/Mass(s);

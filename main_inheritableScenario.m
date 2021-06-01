@@ -3,7 +3,7 @@
 % 
 %   Authors
 %
-%       Carmen Ortega Sabater - Predoctoral researcher
+%       Carmen Ortega Sabater - PhD Student
 %           carmen.ortegasabater@uclm.es
 %
 %       Víctor M. Pérez García  - PI   victor.perezgarcia@uclm.es             
@@ -19,7 +19,7 @@ clear all; close all;
 tic;
 
 % Load parameters and data structures
-run( 'parameters.m' )
+run( 'parameters.m' );
     
 for m = 1:replicates
         
@@ -43,11 +43,6 @@ for m = 1:replicates
             % fill with some cells
             n(PhjIni) = sum(InitialDistr==PhjIni);
         end;
-        
-        % Cells are only present at first in the compartment HalfLatt
-        % n(HalfLatt) = TotalCells; % UNCOMMENT if you want to start simulations
-                                    % from a single phenotype)
-
         
         
         for s=1:up_simSteps % Number of time steps
@@ -74,10 +69,8 @@ for m = 1:replicates
             ChangePhenoUp   = binormal(n, PhenoSwitch/2);
             ChangePhenoDown = binormal(n, PhenoSwitch/2);
             
-            % REVERSIBLE changes
-            nb = newborn - ChangePhenoUp - ChangePhenoDown - PhenoBack;
-            % IRREVERSIBLE changes
-            %nb = newborn - ChangePhenoUp - ChangePhenoDown;
+            % Update population - IRREVERSIBLE changes
+            nb = newborn - ChangePhenoUp - ChangePhenoDown;
             
             % Computation of those changing phenotypes
             CPUp   = [0 ChangePhenoUp(1:Npheno-1)];
@@ -95,15 +88,8 @@ for m = 1:replicates
                 PhBack(Phj) = sum(PhenoBackX==Phj);
             end;
             
-            % REVERSIBLE changes 
-            % n = n + CPUp + CPDown + nb + PhBack;
-            % REVERSIBLE changes + DEATH
-            n = n + CPUp + CPDown + nb + PhBack - dead;
-            
-            % IRREVERSIBLE changes 
-            % n = n + CPUp + CPDown + nb;
             % IRREVERSIBLE changes + DEATH
-            %n = n + CPUp + CPDown + nb - dead ;
+            n = n + CPUp + CPDown + nb - dead ;
             
             % Save results
             rho_average(s,m) = sum(rho.*n)/Mass(s);
@@ -119,7 +105,7 @@ for m = 1:replicates
             history_phenoFreq(s, :, m) = phenoFreq; 
         end
         
-%         % Linear fitting to find slope of Log Act vs Log N
+%       % Linear fitting to find slope of Log Act vs Log N
         Mass_temp = Mass(:,m);
         Activity_temp = Activity( :, m);
         lm = fitlm( log10(Mass_temp), log10( Activity_temp));

@@ -3,7 +3,7 @@
 % 
 %   Authors
 %
-%       Carmen Ortega Sabater - Predoctoral researcher
+%       Carmen Ortega Sabater - PhD Student
 %           carmen.ortegasabater@uclm.es
 %
 %       Víctor M. Pérez García  - PI   victor.perezgarcia@uclm.es             
