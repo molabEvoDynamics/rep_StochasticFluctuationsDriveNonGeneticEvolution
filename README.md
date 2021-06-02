@@ -10,5 +10,5 @@ You will find the following files:
 - `plots.m`. Plot the results of the simulation. 
 - `binormal.m`. Binormal approximation to normal distribution when cell number is high enough to save computational cost. 
 
-During normal use all these files must be located at the same directory but you just need to run the core files (`main_inheritableScenario.m` and `main_partialInheritableScenario.m`). 
+To perform the simulations all these files must be located at the same directory but you just need to run the core files (`main_inheritableScenario.m` and `main_partialInheritableScenario.m`). 
 
